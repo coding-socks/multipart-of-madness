@@ -1,0 +1,45 @@
+{
+  "name": "coding-socks/multipart-of-madness",
+  "description": "This package helps to integrate your library with @uppy/aws-s3-multipart",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "László Görög",
+      "homepage": "https://github.com/nerg4l"
+    }
+  ],
+  "require": {
+    "php": "^8.0",
+    "illuminate/filesystem": "^9.0 || ^10.0",
+    "illuminate/support": "^9.0 || ^10.0",
+    "league/flysystem-aws-s3-v3": "^3.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^7.3 || ^8.0",
+    "phpunit/phpunit": "^9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "CodingSocks\\MultipartOfMadness\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "CodingSocks\\MultipartOfMadness\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-main": "1.0.x-dev"
+    },
+    "laravel": {
+      "providers": [
+        "CodingSocks\\MultipartOfMadness\\MultipartOfMadnessServiceProvider"
+      ]
+    }
+  }
+}
