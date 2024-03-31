@@ -16,7 +16,7 @@ class MultipartOfMadnessServiceProviderTest extends TestCase
             'region' => 'TEST_AWS_DEFAULT_REGION',
             'bucket' => 'TEST_AWS_BUCKET',
             'url' => 'TEST_AWS_URL',
-            'endpoint' => 'TEST_AWS_ENDPOINT',
+            'endpoint' => 'http://TEST_AWS_ENDPOINT',
             'use_path_style_endpoint' => false,
             'throw' => false,
         ]);
