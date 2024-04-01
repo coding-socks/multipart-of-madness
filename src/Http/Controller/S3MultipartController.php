@@ -13,6 +13,11 @@ use Illuminate\Support\Str;
 
 class S3MultipartController extends Controller
 {
+    /**
+     * @var \CodingSocks\MultipartOfMadness\MultipartOfMadness
+     */
+    protected MultipartOfMadness $adapter;
+
     public function __construct(MultipartOfMadness $adapter)
     {
         $this->adapter = $adapter;
