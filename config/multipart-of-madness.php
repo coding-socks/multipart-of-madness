@@ -21,6 +21,16 @@ return [
     'storage_disk' => env('MULTIPART_OF_MADNESS_DISK', 's3'),
 
     /*
+    |
+    | Some providers does not allow signed urls with additional metadata.
+    | By toggling this value, you can enable or disable of adding them
+    | to the signed URL.
+    |
+    */
+
+    'allow_metadata' => false,
+
+    /*
     |--------------------------------------------------------------------------
     | Default ACL
     |--------------------------------------------------------------------------

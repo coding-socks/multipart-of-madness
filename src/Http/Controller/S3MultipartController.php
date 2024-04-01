@@ -46,11 +46,11 @@ class S3MultipartController extends Controller
             'metadata' => [new S3MetadataRule],
         ]);
 
-        $params = [
-            'ContentType' => $data['type'],
-            // TODO: find out why metadata addition is failing,
-            // 'Metadata' => $this->encodeMetadata($data['metadata']),
-        ];
+        $params = ['ContentType' => $data['type']];
+
+        if (config('multipart-of-madness.allow_metadata')) {
+            $params['Metadata'] = $this->encodeMetadata($data['metadata']);
+        }
 
         if ($acl = config('multipart-of-madness.acl')) {
             $params['ACL'] = $acl;
@@ -93,10 +93,11 @@ class S3MultipartController extends Controller
 
         $key = implode('-', [Str::random(), $data['filename']]);
 
-        $params = [
-            'ContentType' => $data['type'],
-            'Metadata' => $this->encodeMetadata($data['metadata']),
-        ];
+        $params = ['ContentType' => $data['type']];
+
+        if (config('multipart-of-madness.allow_metadata')) {
+            $params['Metadata'] = $this->encodeMetadata($data['metadata']);
+        }
 
         if ($acl = config('multipart-of-madness.acl')) {
             $params['ACL'] = $acl;
