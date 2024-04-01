@@ -51,10 +51,8 @@ class S3MultipartController extends Controller
             'content-type' => $data['type'],
         ];
 
-        // TODO: read optional ACL from config
-
-        foreach ($data['metadata'] as $key => $value) {
-            $params["x-amz-meta-{$key}"] = $value;
+        if ($acl = config('multipart-of-madness.acl')) {
+            $params['ACL'] = $acl;
         }
 
         $key = implode('-', [Str::random(), $data['filename']]);
@@ -99,7 +97,9 @@ class S3MultipartController extends Controller
             'Metadata' => $this->encodeMetadata($data['metadata']),
         ];
 
-        // TODO: read optional ACL from config
+        if ($acl = config('multipart-of-madness.acl')) {
+            $params['ACL'] = $acl;
+        }
 
         $result = $this->adapter->createMultipartUpload($key, $params);
 

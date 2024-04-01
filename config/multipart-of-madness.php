@@ -21,6 +21,21 @@ return [
     'storage_disk' => env('MULTIPART_OF_MADNESS_DISK', 's3'),
 
     /*
+    |--------------------------------------------------------------------------
+    | Default ACL
+    |--------------------------------------------------------------------------
+    |
+    | This option controls the default ACL that will be used by the controller
+    | when signed URL needs to be created. You may set this to any of the
+    | canned ACLs available in AWS S3.
+    |
+    | https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl
+    |
+    */
+
+    // 'acl' => 'public-read',
+
+    /*
     |-------------------------------------
     | Routes configurations
     |-------------------------------------
