@@ -47,8 +47,9 @@ class S3MultipartController extends Controller
         ]);
 
         $params = [
-            'success_action_status' => '201',
-            'content-type' => $data['type'],
+            'ContentType' => $data['type'],
+            // TODO: find out why metadata addition is failing,
+            // 'Metadata' => $this->encodeMetadata($data['metadata']),
         ];
 
         if ($acl = config('multipart-of-madness.acl')) {
