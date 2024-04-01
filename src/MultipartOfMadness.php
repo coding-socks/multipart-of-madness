@@ -55,23 +55,35 @@ class MultipartOfMadness extends AwsS3V3Adapter
         ];
     }
 
-    public function listParts(array $args = [])
+    public function listParts($path, array $args = [])
     {
-        return $this->client->listParts($args);
+        return $this->client->listParts(array_merge([
+            'Bucket' => $this->config['bucket'],
+            'Key' => $this->prefixer->prefixPath($path),
+        ], $args));
     }
 
-    public function createMultipartUpload(array $args = [])
+    public function createMultipartUpload($path, array $args = [])
     {
-        return $this->client->createMultipartUpload($args);
+        return $this->client->createMultipartUpload(array_merge([
+            'Bucket' => $this->config['bucket'],
+            'Key' => $this->prefixer->prefixPath($path),
+        ], $args));
     }
 
-    public function completeMultipartUpload(array $args = [])
+    public function completeMultipartUpload($path, array $args = [])
     {
-        return $this->client->completeMultipartUpload($args);
+        return $this->client->completeMultipartUpload(array_merge([
+            'Bucket' => $this->config['bucket'],
+            'Key' => $this->prefixer->prefixPath($path),
+        ], $args));
     }
 
-    public function abortMultipartUpload(array $args = [])
+    public function abortMultipartUpload($path, array $args = [])
     {
-        return $this->client->abortMultipartUpload($args);
+        return $this->client->abortMultipartUpload(array_merge([
+            'Bucket' => $this->config['bucket'],
+            'Key' => $this->prefixer->prefixPath($path),
+        ], $args));
     }
 }

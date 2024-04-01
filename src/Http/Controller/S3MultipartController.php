@@ -95,15 +95,13 @@ class S3MultipartController extends Controller
         $key = implode('-', [Str::random(), $data['filename']]);
 
         $params = [
-            'Bucket' => $this->adapter->getConfig()['bucket'],
-            'Key' => $this->adapter->path($key),
             'ContentType' => $data['type'],
             'Metadata' => $this->encodeMetadata($data['metadata']),
         ];
 
         // TODO: read optional ACL from config
 
-        $result = $this->adapter->createMultipartUpload($params);
+        $result = $this->adapter->createMultipartUpload($key, $params);
 
         return Response::json([
             'key' => $result['Key'],
@@ -133,9 +131,7 @@ class S3MultipartController extends Controller
         $parts = Collection::make();
         $partIndex = 0;
         do {
-            $result = $this->adapter->listParts([
-                'Bucket' => $this->adapter->getConfig()['bucket'],
-                'Key' => $this->adapter->path($key),
+            $result = $this->adapter->listParts($key, [
                 'UploadId' => $uploadId,
                 'PartNumberMarker' => $partIndex,
             ]);
@@ -229,9 +225,7 @@ class S3MultipartController extends Controller
         $data = Validator::make($request->query(), ['key' => ['required', 'string']])->validate();
         $key = $data['key'];
 
-        $this->adapter->abortMultipartUpload([
-            'Bucket' => $this->adapter->getConfig()['bucket'],
-            'Key' => $this->adapter->path($key),
+        $this->adapter->abortMultipartUpload($key, [
             'UploadId' => $uploadId,
         ]);
 
@@ -262,9 +256,7 @@ class S3MultipartController extends Controller
             'parts.*.ETag' => ['required', 'string'],
         ]);
 
-        $result = $this->adapter->completeMultipartUpload([
-            'Bucket' => $this->adapter->getConfig()['bucket'],
-            'Key' => $this->adapter->path($key),
+        $result = $this->adapter->completeMultipartUpload($key, [
             'UploadId' => $uploadId,
             'MultipartUpload' => [
                 'Parts' => $data['parts'],
