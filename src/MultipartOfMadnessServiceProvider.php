@@ -32,7 +32,7 @@ class MultipartOfMadnessServiceProvider extends ServiceProvider
             /** @var FilesystemManager $manager */
             $manager = $app->make(FilesystemManager::class);
             $disk = config('multipart-of-madness.storage_disk', 's3');
-            return new MultipartOfMadness($manager->disk($disk));
+            return MultipartOfMadness::fromAdapter($manager->disk($disk));
         });
 
         $this->app->singleton('multipart-of-madness', function ($app) {

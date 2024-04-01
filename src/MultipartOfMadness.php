@@ -6,9 +6,9 @@ use Illuminate\Filesystem\AwsS3V3Adapter;
 
 class MultipartOfMadness extends AwsS3V3Adapter
 {
-    public function __construct(AwsS3V3Adapter $adapter)
+    public static function fromAdapter(AwsS3V3Adapter $adapter)
     {
-        parent::__construct(
+        return new static(
             $adapter->getDriver(),
             $adapter->getAdapter(),
             $adapter->getConfig(),
