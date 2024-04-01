@@ -55,6 +55,14 @@ class MultipartOfMadness extends AwsS3V3Adapter
         ];
     }
 
+    /**
+     * Lists the parts that have been uploaded for a specific multipart upload.
+     *
+     * @param  string  $path
+     * @param  array  $args
+     * @return \Aws\Result
+     * @see https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
+     */
     public function listParts($path, array $args = [])
     {
         return $this->client->listParts(array_merge([
@@ -63,6 +71,14 @@ class MultipartOfMadness extends AwsS3V3Adapter
         ], $args));
     }
 
+    /**
+     * Initiates a multipart upload.
+     *
+     * @param  string  $path
+     * @param  array  $args
+     * @return \Aws\Result
+     * @see https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html
+     */
     public function createMultipartUpload($path, array $args = [])
     {
         return $this->client->createMultipartUpload(array_merge([
@@ -71,6 +87,14 @@ class MultipartOfMadness extends AwsS3V3Adapter
         ], $args));
     }
 
+    /**
+     * Completes a multipart upload by assembling previously uploaded parts.
+     *
+     * @param string $path
+     * @param array $args
+     * @return \Aws\Result
+     * @see https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
+     */
     public function completeMultipartUpload($path, array $args = [])
     {
         return $this->client->completeMultipartUpload(array_merge([
@@ -79,6 +103,14 @@ class MultipartOfMadness extends AwsS3V3Adapter
         ], $args));
     }
 
+    /**
+     * Aborts a multipart upload.
+     *
+     * @param string $path
+     * @param array $args
+     * @return \Aws\Result
+     * @see https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
+     */
     public function abortMultipartUpload($path, array $args = [])
     {
         return $this->client->abortMultipartUpload(array_merge([
