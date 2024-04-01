@@ -42,6 +42,25 @@ uppy.addPreProcessor(() => {
 })
 ```
 
+Configure the CORS of your S3 or S3-compatible solution. It needs to allow GET and PUT requests from your domain and expose some unsafe HTTP headers to Uppy. Example:
+
+```json
+[
+	{
+		"AllowedOrigins": ["https://my-app.com"],
+		"AllowedMethods": ["GET", "PUT"],
+		"MaxAgeSeconds": 3000,
+		"AllowedHeaders": [
+			"Authorization",
+			"x-amz-date",
+			"x-amz-content-sha256",
+			"content-type"
+		],
+		"ExposeHeaders": ["ETag", "Location"]
+	}
+]
+```
+
 ## Defaults
 
 The expiration times for the signe links is `15 minutes`.
