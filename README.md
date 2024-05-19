@@ -7,7 +7,7 @@ This package helps to integrate your library with `@uppy/aws-s3-multipart`.
 You can easily install this package using Composer.
 
 ```
-composer require coding-socks/multipart-of-madness --dev
+composer require coding-socks/multipart-of-madness
 ```
 
 You have to install `@uppy/aws-s3-multipart` to be able to use it as an uploader. 
